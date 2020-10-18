@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Dark Mode</title>
+</head>
+
+<body>
+    <div id="dark-mode-toggle" title="Dark mode toggle">🌒</div>
+
+    <div class="container">
+        <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam fuga ea accusamus repellat. eveniet, vero dignissimos, amet maiores tempora ab illum veniam tenetur incidunt eligendi temporibus officiis dolorem ipsa facere. Lorem ipsum dolor, sit amet
+            consectetur adipisicing elit. Aliquam fuga ea accusamus repellat, eveniet, vero dignissimos, amet maiores tempora ab illum veniam tenetur incidunt eligendi temporibus officiis dolorem ipsa facere.
+        </p>
+
+        <button class="btn primary-btn">Button 1</button>
+        <button class="btn secondary-btn">Button 2</button>
+    </div>
+
+    <script>
+        const darkModeToggleBtn = document.getElementById('dark-mode-toggle');
+
+        let theme = localStorage.getItem('theme');
+
+        if (theme === 'dark') enableDarkMode();
+
+        darkModeToggleBtn.addEventListener('click', () => {
+
+            theme = localStorage.getItem('theme');
+
+            if (theme === 'dark') {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        function enableDarkMode() {
+            darkModeToggleBtn.innerHTML = '☀️';
+            localStorage.setItem('theme', 'dark');
+            document.body.classList.add('dark-mode');
+        }
+
+        function disableDarkMode() {
+            darkModeToggleBtn.innerHTML = '🌒';
+            localStorage.setItem('theme', 'light');
+            document.body.classList.remove('dark-mode');
+        }
+
+        window
+            .matchMedia('(prefers-color-scheme: dark)')
+            .addListener((e) => (e.matches ? enableDarkMode() : disableDarkMode()));
+    </script>
+
+</body>
+
+</html>
